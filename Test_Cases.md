@@ -1,151 +1,219 @@
 # Test Cases
 
-## Login Module
+Application: OpenCart Demo Website
+URL: https://demo.opencart.com
+Testing Type: Manual Functional Testing
+Browser: Chrome
+OS: Windows 10
 
-### TC_001 – Login with Valid Credentials
+---
+
+## Module: Login
+
+### TC_001 – Verify login with valid credentials
+
+Precondition:
+User account must exist.
 
 Steps:
-1. Navigate to the login page
-2. Enter valid email
-3. Enter valid password
+1. Navigate to My Account → Login
+2. Enter valid registered email
+3. Enter correct password
 4. Click Login
 
 Expected Result:
-User should be logged into the account successfully.
+User should successfully log into the account dashboard.
+
+Priority: High
 
 
-### TC_002 – Login with Invalid Password
+### TC_002 – Verify login fails with incorrect password
 
 Steps:
-1. Navigate to the login page
+1. Navigate to Login page
 2. Enter valid email
 3. Enter incorrect password
 4. Click Login
 
 Expected Result:
-Error message should appear indicating invalid login credentials.
+System should display error message:
+"Warning: No match for E-Mail Address and/or Password."
+
+Priority: High
 
 
-### TC_003 – Login with Empty Fields
-
-Steps:
-1. Navigate to the login page
-2. Leave email and password fields empty
-3. Click Login
-
-Expected Result:
-Validation message should appear asking the user to fill required fields.
-
-
-
-## Product Search Module
-
-### TC_004 – Search for Existing Product
+### TC_003 – Verify login validation for empty fields
 
 Steps:
-1. Enter product name in the search bar
-2. Click search button
+1. Open login page
+2. Leave email field empty
+3. Leave password field empty
+4. Click Login
 
 Expected Result:
-Relevant products should appear in search results.
+System should display validation error message.
 
+Priority: Medium
 
-### TC_005 – Search with Partial Product Name
+---
+
+## Module: Product Search
+
+### TC_004 – Verify search returns results for existing product
 
 Steps:
-1. Enter partial product name in the search bar
-2. Click search
+1. Enter "MacBook" in search bar
+2. Click Search
 
 Expected Result:
-Products containing the keyword should appear.
+Product search results page should display MacBook related items.
+
+Priority: High
 
 
-### TC_006 – Search for Non-Existing Product
+### TC_005 – Verify search with partial keyword
 
 Steps:
-1. Enter a random product name
-2. Click search
+1. Enter "Mac" in search bar
+2. Click Search
 
 Expected Result:
-Message should appear indicating no products found.
+Products containing the keyword should appear in results.
+
+Priority: Medium
 
 
-
-## Product Page Module
-
-### TC_007 – Open Product Details Page
+### TC_006 – Verify search for non-existing product
 
 Steps:
-1. Navigate to any product from homepage
-2. Click on the product
+1. Enter random keyword such as "xyz123"
+2. Click Search
 
 Expected Result:
-Product details page should open with product information.
+Message displayed: "There is no product that matches the search criteria."
 
+Priority: Medium
 
-### TC_008 – Verify Product Information
+---
+
+## Module: Cart
+
+### TC_007 – Verify product can be added to cart
 
 Steps:
-1. Open product page
-2. Observe product details
+1. Navigate to any product page
+2. Click Add to Cart
 
 Expected Result:
-Product name, price, description, and images should be displayed correctly.
+Success message appears and cart total increases.
+
+Priority: High
 
 
-
-## Cart Module
-
-### TC_009 – Add Product to Cart
-
-Steps:
-1. Navigate to product page
-2. Click "Add to Cart"
-
-Expected Result:
-Product should be added to the cart successfully.
-
-
-### TC_010 – Verify Cart Icon Update
+### TC_008 – Verify cart displays correct product information
 
 Steps:
 1. Add product to cart
-2. Observe cart icon
+2. Open cart dropdown
 
 Expected Result:
-Cart icon should display updated item count.
+Cart should display:
+- Product name
+- Quantity
+- Price
+
+Priority: High
 
 
-### TC_011 – Remove Product from Cart
-
-Steps:
-1. Open cart page
-2. Remove product
-
-Expected Result:
-Product should be removed from cart successfully.
-
-
-
-## Checkout Module
-
-### TC_012 – Open Checkout Page
+### TC_009 – Verify product removal from cart
 
 Steps:
 1. Add product to cart
-2. Navigate to cart
+2. Open cart
+3. Click remove icon
+
+Expected Result:
+Product should be removed from cart.
+
+Priority: High
+
+---
+
+## Module: Checkout
+
+### TC_010 – Verify checkout page loads
+
+Steps:
+1. Add product to cart
+2. Navigate to cart page
 3. Click Checkout
 
 Expected Result:
-User should be redirected to checkout page.
+Checkout page should load successfully.
+
+Priority: High
 
 
-### TC_013 – Proceed Through Checkout Steps
+### TC_011 – Verify checkout requires login
 
 Steps:
-1. Open checkout page
-2. Fill required details
-3. Continue through checkout steps
+1. Add product to cart
+2. Click checkout without logging in
 
 Expected Result:
-User should be able to proceed through checkout process without errors.
+User should be prompted to login or register.
+
+Priority: High
+
+### TC_012 – Verify checkout displays correct cart summary
+
+Preconditions:
+Product added to cart.
+
+Steps:
+1. Add a product to cart
+2. Navigate to checkout page
+3. Observe order summary section
+
+Expected Result:
+Order summary should correctly display:
+- Product name
+- Quantity
+- Individual price
+- Total order amount
+
+### TC_013 – Verify user can update quantity before checkout
+
+Steps:
+1. Add product to cart
+2. Navigate to cart page
+3. Increase product quantity
+4. Click update
+
+Expected Result:
+Cart total and item quantity should update correctly.
+
+### TC_014 – Verify checkout prevents order submission with missing mandatory fields
+
+Steps:
+1. Add product to cart
+2. Navigate to checkout
+3. Leave required fields empty (e.g., address, city)
+4. Attempt to proceed
+
+Expected Result:
+System should display validation messages for required fields.
+
+### TC_015 – Verify order confirmation page appears after successful checkout
+
+Preconditions:
+User is logged in and checkout details are filled.
+
+Steps:
+1. Add product to cart
+2. Proceed to checkout
+3. Fill billing and shipping details
+4. Confirm order
+
+Expected Result:
+System should display order confirmation page with order ID and success message.
